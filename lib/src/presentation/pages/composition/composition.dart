@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:music_note/src/domain/entities/composition.dart';
 import 'package:music_note/src/presentation/components/components.dart';
 import 'package:music_note/src/presentation/theme/theme.dart';
+import 'package:photo_view/photo_view.dart';
 
 class CompositionPage extends StatefulWidget {
   CompositionPage({Key? key, required this.composition}) : super(key: key);
@@ -74,6 +76,62 @@ class _CompositionPageState extends State<CompositionPage> {
     );
   }
 
+  Widget _note(String asset) {
+    return GestureDetector(
+      child: Image.asset(asset),
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Scaffold(
+              body: Center(
+                child: Container(
+                  padding: AppTheme.horizontalPadding,
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PhotoView(
+                          tightMode: true,
+                          disableGestures: true,
+                          backgroundDecoration: BoxDecoration(color: Colors.transparent),
+                          imageProvider: AssetImage(asset),
+                        ),
+                        SizedBox(height: 10),
+                        InkWell(
+                          onTap: () => AutoRouter.of(context).pop(),
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: AppTheme.borderRadiusMain,
+                            ),
+                            width: double.infinity,
+                            child: Center(
+                              child: Text(
+                                "Exit",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   Widget _loaded() {
     return Column(
       children: [
@@ -92,11 +150,11 @@ class _CompositionPageState extends State<CompositionPage> {
               padding: AppTheme.horizontalPadding,
               child: Row(
                 children: [
-                  Image.asset("assets/images/note_1.png"),
+                  _note("assets/images/note_1.png"),
                   SizedBox(width: 10),
-                  Image.asset("assets/images/note_1.png"),
+                  _note("assets/images/note_1.png"),
                   SizedBox(width: 10),
-                  Image.asset("assets/images/note_1.png"),
+                  _note("assets/images/note_1.png"),
                 ],
               ),
             ),
