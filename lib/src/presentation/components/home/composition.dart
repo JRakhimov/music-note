@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:music_note/src/domain/cubits/player/player_cubit.dart';
 import 'package:music_note/src/domain/entities/composition.dart';
 import 'package:music_note/src/presentation/theme/theme.dart';
+import 'package:provider/src/provider.dart';
 
 class CompositionCard extends StatelessWidget {
   CompositionCard({
@@ -23,9 +25,12 @@ class CompositionCard extends StatelessWidget {
       highlightColor: Colors.transparent,
       child: Row(
         children: [
-          ClipRRect(
-            child: Image.network(composition.imageUrl, width: 54, height: 54),
-            borderRadius: AppTheme.borderRadiusMain,
+          GestureDetector(
+            onTap: () => context.read<PlayerCubit>().playComposition(composition),
+            child: ClipRRect(
+              child: Image.asset(composition.imageAsset, width: 54, height: 54),
+              borderRadius: AppTheme.borderRadiusMain,
+            ),
           ),
           SizedBox(width: 10),
           Expanded(

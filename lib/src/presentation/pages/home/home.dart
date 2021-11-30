@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            BottomPlayer(composition: TempData.compositions[0]),
+            BottomPlayer(),
           ],
         ),
       ),

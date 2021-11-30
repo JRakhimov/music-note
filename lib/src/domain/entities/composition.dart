@@ -2,10 +2,12 @@ class CompositionEntity {
   CompositionEntity({
     required this.title,
     required this.artist,
-    required this.imageUrl,
+    required this.imageAsset,
+    required this.audioAsset,
   });
 
-  String imageUrl;
+  String imageAsset;
+  String audioAsset;
   String title;
   String artist;
 }

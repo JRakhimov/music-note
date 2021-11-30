@@ -78,7 +78,7 @@ class _CompositionPageState extends State<CompositionPage> {
 
   Widget _note(String asset) {
     return GestureDetector(
-      child: Image.asset(asset),
+      child: Image.asset(asset, height: 350),
       onTap: () {
         showDialog(
           context: context,
@@ -152,15 +152,19 @@ class _CompositionPageState extends State<CompositionPage> {
                 children: [
                   _note("assets/images/note_1.png"),
                   SizedBox(width: 10),
-                  _note("assets/images/note_1.png"),
+                  _note("assets/images/note_2.png"),
                   SizedBox(width: 10),
-                  _note("assets/images/note_1.png"),
+                  _note("assets/images/note_3.png"),
+                  SizedBox(width: 10),
+                  _note("assets/images/note_4.png"),
+                  SizedBox(width: 10),
+                  _note("assets/images/note_5.png"),
                 ],
               ),
             ),
           ),
         ),
-        BottomPlayer(composition: widget.composition),
+        BottomPlayer(),
       ],
     );
   }
